@@ -1,0 +1,28 @@
+{
+  "name": "medooch/export-bundle",
+  "description": "A simple way to export data from specific entity to CSV file.",
+  "type": "library",
+  "require": {
+    "php": "7.1.1",
+    "symfony/symfony": "3.3",
+    "medooch/symfony-components": "dev-master"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Trimech Mehdi",
+      "email": "trimechmehdi11@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Medooch\\Bundles\\ExportBundle\\": "../../Medooch/ExportBundle/"
+    }
+  }
+}
