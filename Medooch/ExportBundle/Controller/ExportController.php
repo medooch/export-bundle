@@ -12,6 +12,7 @@
 
 namespace Medooch\Bundles\ExportBundle\Controller;
 
+use Medooch\Components\Helper\Yml\YamlManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -42,10 +43,17 @@ class ExportController extends Controller
     public function exportAction($entity)
     {
         /** check if the $entity is defined in config */
-        if (!$this->container->hasParameter($entity)) {
+        $filename = $this->get('kernel')->getRootDir() . '/app/config/export.yml';
+        $entities = YamlManipulator::getFileContents($filename);
+
+        if (is_null($entities)) {
+            throw $this->createNotFoundException($filename . ' not found.');
+        }
+
+        if (!isset($entities[$entity])) {
             throw $this->createNotFoundException($entity . ' is not defined in the configuration');
         }
-        $configuration = $this->getParameter($entity);
+        $configuration = $entities[$entity];
         $queryBuilder = $configuration['query'];
 
         $em = $this->getDoctrine()->getManager();
