@@ -3,7 +3,7 @@
   "description": "A simple way to export data from specific entity to CSV file.",
   "type": "library",
   "require": {
-    "php": "7.1.1",
+    "php": "7.1.*",
     "symfony/symfony": "3.3",
     "medooch/symfony-components": "dev-master"
   },
