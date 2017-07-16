@@ -43,13 +43,13 @@ class ExportController extends Controller
     public function exportAction($entity)
     {
         /** check if the $entity is defined in config */
-        $filename = $this->get('kernel')->getRootDir() . '/app/config/export.yml';
+        $filename = $this->get('kernel')->getRootDir() . '/config/export.yml';
         $entities = YamlManipulator::getFileContents($filename);
 
         if (is_null($entities)) {
             throw $this->createNotFoundException($filename . ' not found.');
         }
-
+        $entities = $entities['export']['entities'];
         if (!isset($entities[$entity])) {
             throw $this->createNotFoundException($entity . ' is not defined in the configuration');
         }
